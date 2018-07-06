@@ -152,7 +152,7 @@ public class RNZipArchiveModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void unzipWithPassword(final String zipFilePath, final String destDirectory, finalSting password final Promise promise) {
+  public void unzipWithPassword(final String zipFilePath, final String destDirectory, final String password final Promise promise) {
     try {
       ZipFile zipFile = new ZipFile(zipFilePath);
 
