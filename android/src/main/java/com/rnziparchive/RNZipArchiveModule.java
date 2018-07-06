@@ -27,11 +27,6 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import net.lingala.zip4j.core.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
-import net.lingala.zip4j.model.ZipParameters;
-import net.lingala.zip4j.util.Zip4jConstants;
-
 public class RNZipArchiveModule extends ReactContextBaseJavaModule {
   private static final String TAG = RNZipArchiveModule.class.getSimpleName();
 
@@ -152,9 +147,9 @@ public class RNZipArchiveModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void unzipWithPassword(final String zipFilePath, final String destDirectory, final String password final Promise promise) {
+  public void unzipWithPassword(final String zipFilePath, final String destDirectory, final String password, final Promise promise) {
     try {
-      ZipFile zipFile = new ZipFile(zipFilePath);
+      net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(zipFilePath);
 
       if (zipFile.isEncrypted()) {
         zipFile.setPassword(password);
@@ -162,7 +157,7 @@ public class RNZipArchiveModule extends ReactContextBaseJavaModule {
 
       zipFile.extractAll(destDirectory);
       promise.resolve(destDirectory);
-    } catch (ZipException ex) {
+    } catch (net.lingala.zip4j.exception.ZipException ex) {
       promise.reject(null, "Failed to extract file " + ex.printStackTrace());
     }
   }
