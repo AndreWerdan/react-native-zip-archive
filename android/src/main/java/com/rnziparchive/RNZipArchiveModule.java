@@ -158,7 +158,7 @@ public class RNZipArchiveModule extends ReactContextBaseJavaModule {
       zipFile.extractAll(destDirectory);
       promise.resolve(destDirectory);
     } catch (net.lingala.zip4j.exception.ZipException ex) {
-      promise.reject(null, "Failed to extract file " + ex.printStackTrace());
+      promise.reject(null, "Failed to extract file " + ex.getLocalizedMessage());
     }
   }
 
